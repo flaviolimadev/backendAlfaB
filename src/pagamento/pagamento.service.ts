@@ -46,7 +46,7 @@ export class PagamentoService {
     const response = await axios.post(
       'https://api.primepag.com.br/v1/pix/qrcodes',
       {
-        value_cents: Math.round(valor * 100),
+        value_cents: Math.round(valor),
         generator_name: user.first_name,
         generator_document: cpf,
         expiration_time: '1800',
@@ -66,7 +66,7 @@ export class PagamentoService {
     await supabase.from('deposits').insert({
       profile_id: userId,
       txid: txid,
-      value: Math.round((valor * 100)),
+      value: Math.round((valor)),
       type: metodo,
       status: '0',
       descricao: 'Gerado via API',
