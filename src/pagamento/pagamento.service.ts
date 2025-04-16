@@ -67,7 +67,7 @@ export class PagamentoService {
       profile_id: userId,
       txid: txid,
       value: Math.round((valor)),
-      type: metodo,
+      type: 'PIX',
       status: '0',
       descricao: 'Gerado via API',
       bonus: 0,

@@ -28,7 +28,7 @@ export class PagamentoCheckerService {
       .from('deposits')
       .select('id, txid, created_at, profile_id, value')
       .eq('status', '0')
-      .eq('type', '1');
+      .eq('type', 'PIX');
 
     if (error || !depositos) {
       this.logger.error('Erro ao buscar depósitos pendentes');
