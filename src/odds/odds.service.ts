@@ -2,6 +2,12 @@ import { Injectable, Logger } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { supabase } from '../supabase/supabase.service';
 import axios from 'axios';
+import * as dayjs from 'dayjs';
+import * as utc from 'dayjs/plugin/utc';
+import * as timezone from 'dayjs/plugin/timezone';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 @Injectable()
 export class OddsService {
@@ -26,7 +32,9 @@ export class OddsService {
 
     for (const event of events) {
       if (parseInt(event.time) > agora) {
+        const dataHoraBrasilia = dayjs.unix(event.time).utc().tz('America/Sao_Paulo').format('DD/MM/YYYY HH:mm');
         const url = `https://api.b365api.com/v3/bet365/prematch?token=${this.token}&FI=${event.id}`;
+
         try {
           const response = await axios.get(url);
           if (response.data?.success && response.data.results.length > 0) {
@@ -35,11 +43,13 @@ export class OddsService {
               data: response.data.results[0],
               updated_at: new Date().toISOString(),
             });
+
             await supabase.from('events').update({ odds_fetched: true }).eq('id', event.id);
-            this.logger.log(`✅ Odds atualizadas para evento ${event.id}`);
+
+            this.logger.log(`✅ Odds atualizadas para evento ${event.id} (Horário: ${dataHoraBrasilia})`);
           }
         } catch (err) {
-          this.logger.warn(`⚠️ Erro ao buscar odds para evento ${event.id}`);
+          this.logger.warn(`⚠️ Erro ao buscar odds para evento ${event.id} (Horário: ${dataHoraBrasilia})`);
         }
       }
     }

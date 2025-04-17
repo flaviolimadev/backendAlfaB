@@ -1,5 +1,11 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { supabase } from '../supabase/supabase.service';
+import * as dayjs from 'dayjs';
+import * as utc from 'dayjs/plugin/utc';
+import * as timezone from 'dayjs/plugin/timezone';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 @Injectable()
 export class BetsDetailsService {
@@ -34,7 +40,7 @@ export class BetsDetailsService {
       evento: {
         id: event.id,
         esporte: event.sport_id,
-        data: new Date(event.time * 1000).toLocaleString('pt-BR'),
+        data: dayjs.unix(event.time).utc().tz('America/Sao_Paulo').format('DD/MM/YYYY HH:mm'),
         pais: event.country_name || '',
         liga: event.league_name,
         timeCasa: event.home_name,

@@ -8,7 +8,7 @@ export class BetsLiveService {
   private readonly logger = new Logger(BetsLiveService.name);
   private readonly token = '92956-eZsGG6pLUF87yf';
 
-  @Cron(CronExpression.EVERY_MINUTE)
+  //@Cron(CronExpression.EVERY_MINUTE)
   async fetchLiveEvents() {
     this.logger.log('🎯 Buscando eventos ao vivo...');
 

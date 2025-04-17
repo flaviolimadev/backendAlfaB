@@ -8,7 +8,7 @@ export class OddsLiveService {
   private readonly logger = new Logger(OddsLiveService.name);
   private readonly token = '92956-eZsGG6pLUF87yf';
 
-  @Cron('*/1 * * * *') // Executa a cada 1 minuto
+  //@Cron('*/1 * * * *') // Executa a cada 1 minuto
   async atualizarOddsAoVivo() {
     this.logger.log('🔄 Atualizando odds ao vivo...');
 
