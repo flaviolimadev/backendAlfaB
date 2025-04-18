@@ -12,7 +12,7 @@ export class PagamentoCheckerService {
 
     const headers = {
       Authorization:
-        'ODE2NTliNjctNzQ5Zi00NDFjLTgwNDAtMjY1NzM2YTA1NDFkOmRmOGYwN2JjLWFjZWYtNDgxNi1iYTQ3LTliZWU5OTc3NDdlYQ==',
+        'ODUwOTIzNmYtNzAwNS00YjUzLWJkYzEtOTg4ZTMwZDdjZGQ3OjBiYTcxN2JlLTczMmEtNGE5NC04ZWUyLTBlYTE3NTFlOGYxOQ==',
       'Content-Type': 'application/json',
     };
 
