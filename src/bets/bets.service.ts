@@ -7,7 +7,7 @@ export class BetsService {
   private readonly logger = new Logger(BetsService.name);
 
   async importarEventos(sportId: string, dia: string, pagina = 1): Promise<any> {
-    const url = `https://api.b365api.com/v1/bet365/upcoming?sport_id=${sportId}&skip_esports=true&day=${dia}&token=92956-eZsGG6pLUF87yf&page=${pagina}`;
+    const url = `https://api.b365api.com/v1/bet365/upcoming?sport_id=${sportId}&skip_esports=true&day=${dia}&token=219918-8GSZxj7YNA6XEi&page=${pagina}`;
 
     try {
       const response = await axios.get(url);
